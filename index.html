@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PE Faculty Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#17243b}
+aside{width:235px;background:#182744;color:white;position:fixed;top:0;bottom:0;padding:24px 15px}
+aside h2{font-size:19px;margin-bottom:30px}
+nav button{display:block;width:100%;background:none;border:0;color:#e0e7f4;text-align:left;padding:13px;border-radius:8px;cursor:pointer}
+nav button:hover,nav button.active{background:#34496d}
+main{margin-left:235px;padding:32px}
+h1{margin-top:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.card{background:white;padding:22px;border-radius:12px;box-shadow:0 2px 8px #15233b10;cursor:pointer}
+.card h3{margin:0 0 10px}
+.card p{color:#68758a;font-size:14px}
+.panel{background:white;padding:24px;border-radius:12px;margin-top:22px}
+@media(max-width:650px){aside{position:static;width:100%}main{margin:0;padding:18px}nav{display:flex;overflow-x:auto}nav button{min-width:130px}}
+</style>
+</head>
+<body>
+<aside>
+<h2>🎓 PE Faculty Hub</h2>
+<nav id="menu"></nav>
+</aside>
+<main>
+<h1 id="heading">Dashboard</h1>
+<p>Welcome to your personal teaching workspace.</p>
+<div id="content"></div>
+</main>
+<script>
+const sections=[
+["Dashboard","🏠"],["Learning Guides","📚"],
+["Class Records","📊"],["Students","👥"],
+["Forms & Rubrics","📋"],["To-Do List","✅"],
+["Calendar","📅"],["File Directory","📁"],
+["Settings","⚙️"]
+];
+const menu=document.getElementById("menu");
+const content=document.getElementById("content");
+sections.forEach(([name,icon])=>{
+let b=document.createElement("button");
+b.textContent=icon+" "+name;
+b.onclick=()=>show(name);
+menu.appendChild(b);
+});
+function show(name){
+document.getElementById("heading").textContent=name;
+[...menu.children].forEach(b=>b.classList.toggle("active",b.textContent.includes(name)));
+content.innerHTML="";
+if(name==="Dashboard"){
+let grid=document.createElement("div");
+grid.className="cards";
+sections.slice(1).forEach(([n,icon])=>{
+let card=document.createElement("div");
+card.className="card";
+card.innerHTML="<h3>"+icon+" "+n+"</h3><p>Open section</p>";
+card.onclick=()=>show(n);
+grid.appendChild(card);
+});
+content.appendChild(grid);
+}else{
+let panel=document.createElement("div");
+panel.className="panel";
+let heading=document.createElement("h2");
+heading.textContent=name;
+let message=document.createElement("p");
+message.textContent="This section is ready for future features and records.";
+panel.append(heading,message);
+content.appendChild(panel);
+}
+}
+show("Dashboard");
+</script>
+</body>
+</html>
