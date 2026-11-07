@@ -3,292 +3,439 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PE Faculty Hub</title>
 <style>
+:root{font-family:Segoe UI,Arial,sans-serif;color:#182741;background:#f3f6fb}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1c2940}
-aside{width:245px;background:#172642;color:white;position:fixed;inset:0 auto 0 0;padding:22px 14px;overflow:auto}
+body{margin:0}
+button,input,select{font:inherit}
+button{cursor:pointer}
+aside{position:fixed;left:0;top:0;bottom:0;width:245px;background:#192844;color:white;padding:22px 14px;overflow:auto}
 aside h2{font-size:20px;margin:0 0 6px}
-aside p{font-size:12px;color:#b8c7df;margin-bottom:25px}
-nav button{display:block;width:100%;border:0;background:none;color:#e0e8f6;text-align:left;padding:13px;border-radius:8px;cursor:pointer;margin:3px 0}
-nav button:hover,nav button.active{background:#344a70}
-main{margin-left:245px;padding:30px;max-width:1500px}
-header{display:flex;justify-content:space-between;align-items:center;gap:15px}
-h1{margin:0 0 8px;font-size:28px}
-.subtitle{color:#718097;margin:0 0 25px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
-.card,.panel{background:white;border-radius:12px;padding:22px;box-shadow:0 2px 10px #1425400c}
+aside small{color:#b8c7df}
+nav{margin-top:30px}
+nav button{display:block;width:100%;text-align:left;border:0;background:transparent;color:#e1e9f6;padding:13px;border-radius:8px;margin:3px 0}
+nav button:hover,nav button.active{background:#354a70}
+main{margin-left:245px;padding:30px}
+h1{margin:0 0 8px}
+.muted{color:#718098;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.card,.panel{background:white;border-radius:13px;padding:22px;box-shadow:0 2px 10px #15243d0d}
 .card{cursor:pointer}
-.card:hover{box-shadow:0 5px 18px #14254020}
-.card h3{margin:10px 0}
-.card p,.muted{color:#718097;font-size:14px}
+.card:hover{box-shadow:0 5px 18px #15243d20}
 .panel{margin-top:20px}
-input,select{padding:11px;border:1px solid #d4dce8;border-radius:7px;max-width:100%}
-input{width:100%}
-.form{display:grid;grid-template-columns:2fr 1fr auto;gap:10px;margin:15px 0}
-button.primary{background:#2758a5;color:white;border:0;padding:11px 16px;border-radius:7px;cursor:pointer}
-button.small{padding:7px 10px;border:1px solid #d7dfeb;background:white;border-radius:6px;cursor:pointer}
-.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #edf0f5}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input,select{padding:11px;border:1px solid #d5deea;border-radius:7px;max-width:100%}
+input[type=text],input[type=url]{flex:1;min-width:180px}
+.primary{background:#2858a5;color:white;border:0;padding:11px 16px;border-radius:7px}
+.small{background:white;border:1px solid #d5deea;padding:8px 11px;border-radius:7px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #edf0f5;padding:13px 0}
 .item:last-child{border:0}
-.item a{color:#2256a5;overflow-wrap:anywhere}
-.item span{font-size:13px;color:#718097}
-.item .details{flex:1;min-width:0}
-.item .details strong{display:block;margin-bottom:5px}
-.actions{display:flex;gap:7px;align-items:center}
-.done{text-decoration:line-through;color:#8793a6}
+.item .info{flex:1;min-width:0;overflow-wrap:anywhere}
+.item strong{display:block;margin-bottom:5px}
+.item a{color:#2758a5}
+.done{text-decoration:line-through;color:#999}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.day{min-height:75px;border:1px solid #e0e6ef;border-radius:7px;padding:7px;font-size:13px;overflow-wrap:anywhere}
+.day.today{background:#eaf2ff}
+.day b{display:block;margin-bottom:5px}
+.event{display:block;background:#dce9ff;border-radius:4px;padding:3px;margin-top:3px;font-size:11px}
+table{width:100%;border-collapse:collapse}
+td,th{border-bottom:1px solid #e4e9f1;padding:10px;text-align:left}
+.scroll{overflow-x:auto}
+.notice{background:#fff7e5;padding:12px;border-radius:8px;font-size:13px;color:#765317}
 @media(max-width:700px){
-aside{position:static;width:100%;padding:15px}
-aside p{margin-bottom:10px}
-nav{display:flex;overflow-x:auto}
-nav button{min-width:140px}
+aside{position:static;width:100%}
+nav{display:flex;overflow-x:auto;margin-top:15px}
+nav button{min-width:145px}
 main{margin:0;padding:18px}
-.form{grid-template-columns:1fr}
+.day{min-height:55px;padding:4px}
 }
 </style>
 </head>
 <body>
 <aside>
 <h2>🎓 PE Faculty Hub</h2>
-<p>Academic Year 2026–2027</p>
+<small>Academic Year 2026–2027</small>
 <nav id="menu"></nav>
 </aside>
 <main>
-<header>
-<div>
 <h1 id="heading">Dashboard</h1>
-<p class="subtitle" id="subtitle">Your personal teaching workspace</p>
-</div>
-</header>
+<p class="muted" id="subtitle">Your personal teaching workspace</p>
 <div id="content"></div>
 </main>
 <script>
+"use strict";
 const sections=[
-["Dashboard","🏠"],
-["Learning Guides","📚"],
-["Class Records","📊"],
-["Students","👥"],
-["Forms & Rubrics","📋"],
-["To-Do List","✅"],
-["Calendar","📅"],
-["File Directory","📁"],
+["Dashboard","🏠"],["Learning Guides","📚"],
+["Class Records","📊"],["Students","👥"],
+["Forms & Rubrics","📋"],["To-Do List","✅"],
+["Calendar","📅"],["File Directory","📁"],
 ["Settings","⚙️"]
 ];
-const KEY="peFacultyHubV2";
-const empty={guides:[],forms:[],tasks:[],events:[]};
+const KEY="peFacultyHub31";
+const defaults={
+guides:[],forms:[],tasks:[],events:[],
+classes:[],students:[]
+};
 let data;
 try{
-data={...empty,...JSON.parse(localStorage.getItem(KEY)||"{}")};
-}catch(e){data={...empty};}
+data={...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}")};
+}catch(e){data={...defaults};}
+for(const k of Object.keys(defaults))
+if(!Array.isArray(data[k]))data[k]=[];
 let current="Dashboard";
+let month=new Date().getMonth();
+let year=new Date().getFullYear();
 const menu=document.getElementById("menu");
 const content=document.getElementById("content");
-function save(){
-localStorage.setItem(KEY,JSON.stringify(data));
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function node(tag,text,cls){
+const n=document.createElement(tag);
+if(text!==undefined)n.textContent=text;
+if(cls)n.className=cls;
+return n;
 }
-function el(tag,text,cls){
-const node=document.createElement(tag);
-if(text!==undefined)node.textContent=text;
-if(cls)node.className=cls;
-return node;
+function btn(text,fn,cls="small"){
+const b=node("button",text,cls);
+b.onclick=fn;return b;
 }
-function button(text,action,cls="small"){
-const b=el("button",text,cls);
-b.onclick=action;
-return b;
+function input(type,placeholder){
+const i=node("input");i.type=type;
+if(placeholder)i.placeholder=placeholder;
+return i;
+}
+function panel(title){
+const p=node("section",undefined,"panel");
+p.appendChild(node("h2",title));
+content.appendChild(p);return p;
+}
+function line(parent,title,detail,actions=[]){
+const r=node("div",undefined,"item");
+const info=node("div",undefined,"info");
+info.append(node("strong",title),node("span",detail,"muted"));
+r.appendChild(info);
+for(const a of actions)r.appendChild(a);
+parent.appendChild(r);
+return r;
+}
+function removeItem(type,item){
+if(!confirm("Remove this item?"))return;
+data[type]=data[type].filter(x=>x!==item);
+save();show(current);
 }
 sections.forEach(([name,icon])=>{
-menu.appendChild(button(icon+" "+name,()=>show(name)));
+menu.appendChild(btn(icon+" "+name,()=>show(name)));
 });
 function show(name){
 current=name;
 document.getElementById("heading").textContent=name;
 document.getElementById("subtitle").textContent=
-name==="Dashboard"?"Your personal teaching workspace":
-"Manage your "+name.toLowerCase();
-[...menu.children].forEach((b,i)=>{
-b.className=sections[i][0]===name?"active":"";
-});
+name==="Dashboard"?"Your personal teaching workspace":"Manage your "+name.toLowerCase();
+[...menu.children].forEach((b,i)=>b.className=sections[i][0]===name?"active":"");
 content.replaceChildren();
 if(name==="Dashboard")dashboard();
-else if(name==="Learning Guides")links("guides","Learning Guides");
-else if(name==="Forms & Rubrics")links("forms","Forms & Rubrics");
-else if(name==="File Directory")directory();
+else if(name==="Learning Guides")resources("guides");
+else if(name==="Forms & Rubrics")resources("forms");
+else if(name==="Class Records")classes();
+else if(name==="Students")students();
 else if(name==="To-Do List")tasks();
-else if(name==="Calendar")events();
+else if(name==="Calendar")calendar();
+else if(name==="File Directory")directory();
 else if(name==="Settings")settings();
-else placeholder(name);
-}
-function panel(title){
-const p=el("section",undefined,"panel");
-p.appendChild(el("h2",title));
-content.appendChild(p);
-return p;
 }
 function dashboard(){
-const grid=el("div",undefined,"cards");
-const cards=[
-["Learning Guides","📚",data.guides.length+" resources"],
-["Class Records","📊","Coming soon"],
-["Students","👥","Coming soon"],
-["Forms & Rubrics","📋",data.forms.length+" resources"],
-["To-Do List","✅",data.tasks.filter(t=>!t.done).length+" pending"],
-["Calendar","📅",data.events.length+" events"],
-["File Directory","📁","All saved links"]
-];
-cards.forEach(([name,icon,desc])=>{
-const c=el("div",undefined,"card");
-c.append(el("div",icon),el("h3",name),el("p",desc));
-c.onclick=()=>show(name);
-grid.appendChild(c);
+const g=node("div",undefined,"grid");
+const counts={
+"Learning Guides":data.guides.length,
+"Class Records":data.classes.length,
+"Students":data.students.length,
+"Forms & Rubrics":data.forms.length,
+"To-Do List":data.tasks.filter(x=>!x.done).length,
+"Calendar":data.events.length,
+"File Directory":"Open"
+};
+sections.slice(1).forEach(([name,icon])=>{
+const c=node("div",undefined,"card");
+c.append(node("div",icon),node("h3",name),
+node("p",String(counts[name]??"Settings"),"muted"));
+c.onclick=()=>show(name);g.appendChild(c);
 });
-content.appendChild(grid);
+content.appendChild(g);
 const p=panel("Welcome to PE Faculty Hub");
-p.appendChild(el("p",
-"Organize your teaching materials, deadlines, and academic activities in one place."));
+p.appendChild(node("p","Manage teaching materials, tasks, classes, and schedules in one workspace."));
 }
-function links(type,title){
+let dbPromise;
+function openDB(){
+if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{
+const req=indexedDB.open("PEFacultyHubFiles",1);
+req.onupgradeneeded=()=>{
+req.result.createObjectStore("files",{keyPath:"id"});
+};
+req.onsuccess=()=>resolve(req.result);
+req.onerror=()=>reject(req.error);
+});
+return dbPromise;
+}
+async function putFile(file){
+const db=await openDB();
+const id=crypto.randomUUID();
+return new Promise((resolve,reject)=>{
+const tx=db.transaction("files","readwrite");
+tx.objectStore("files").put({id,file});
+tx.oncomplete=()=>resolve(id);
+tx.onerror=()=>reject(tx.error);
+});
+}
+async function getFile(id){
+const db=await openDB();
+return new Promise((resolve,reject)=>{
+const req=db.transaction("files").objectStore("files").get(id);
+req.onsuccess=()=>resolve(req.result?.file);
+req.onerror=()=>reject(req.error);
+});
+}
+async function deleteFile(id){
+const db=await openDB();
+return new Promise((resolve,reject)=>{
+const tx=db.transaction("files","readwrite");
+tx.objectStore("files").delete(id);
+tx.oncomplete=resolve;
+tx.onerror=()=>reject(tx.error);
+});
+}
+async function openFile(item,download=false){
+try{
+const file=await getFile(item.fileId);
+if(!file)throw Error("File not found in this browser.");
+const url=URL.createObjectURL(file);
+const a=document.createElement("a");
+a.href=url;
+if(download)a.download=item.name;
+else a.target="_blank";
+document.body.appendChild(a);a.click();a.remove();
+setTimeout(()=>URL.revokeObjectURL(url),60000);
+}catch(e){alert(e.message)}
+}
+function resources(type){
+const title=type==="guides"?"Learning Guides":"Forms & Rubrics";
 const p=panel(title);
-p.appendChild(el("p","Add links to Google Drive, PDFs, documents, or other online resources.","muted"));
-const f=el("form",undefined,"form");
-const name=el("input");
-name.placeholder="Resource title";
-name.required=true;
-const url=el("input");
-url.placeholder="https://...";
-url.type="url";
-url.required=true;
-const add=el("button","Add Resource","primary");
+p.appendChild(node("p","Upload files from your laptop or save Google Drive links.","muted"));
+const f=node("form",undefined,"row");
+const name=input("text","File or resource title");
+const category=input("text",type==="guides"?"Subject / Unit":"Form category");
+const url=input("url","Optional Google Drive URL");
+const file=input("file");
+file.accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg";
+const add=node("button","Add Resource","primary");
 add.type="submit";
-f.append(name,url,add);
+f.append(name,category,url,file,add);
+f.onsubmit=async e=>{
+e.preventDefault();
+const selected=file.files[0];
+if(!selected&&!url.value.trim()){
+alert("Choose a file or enter a URL.");return;
+}
+if(selected&&selected.size>25*1024*1024){
+alert("Maximum file size is 25 MB.");return;
+}
+add.disabled=true;
+try{
+let fileId=null;
+if(selected)fileId=await putFile(selected);
+data[type].push({
+id:crypto.randomUUID(),
+name:name.value.trim()||selected?.name||"Resource",
+category:category.value.trim()||"General",
+url:url.value.trim(),
+fileId
+});
+save();show(current);
+}catch(err){alert("Could not save file: "+err.message)}
+finally{add.disabled=false}
+};
+p.appendChild(f);
+const search=input("text","Search resources...");
+p.appendChild(search);
+const results=node("div");
+p.appendChild(results);
+function render(){
+results.replaceChildren();
+const q=search.value.toLowerCase();
+const items=data[type].filter(x=>
+(x.name+" "+x.category).toLowerCase().includes(q));
+if(!items.length)results.appendChild(node("p","No matching resources.","muted"));
+items.forEach(item=>{
+const actions=[];
+if(item.fileId){
+actions.push(btn("Open",()=>openFile(item)));
+actions.push(btn("Download",()=>openFile(item,true)));
+}
+if(item.url){
+actions.push(btn("Link",()=>{
+const u=new URL(item.url);
+if(!["https:","http:"].includes(u.protocol))return;
+window.open(u.href,"_blank","noopener,noreferrer");
+}));
+}
+actions.push(btn("Rename",()=>{
+const n=prompt("New title:",item.name);
+if(n?.trim()){item.name=n.trim();save();render()}
+}));
+actions.push(btn("Delete",async()=>{
+if(!confirm("Delete this resource?"))return;
+if(item.fileId)await deleteFile(item.fileId);
+data[type]=data[type].filter(x=>x!==item);
+save();render();
+}));
+line(results,item.name,item.category||"General",actions);
+});
+}
+search.oninput=render;render();
+}
+function classes(){
+const p=panel("Class Sections");
+p.appendChild(node("p","Create class sections for your teaching schedule. Use sample data only.","muted"));
+const f=node("form",undefined,"row");
+const name=input("text","Section name");
+const subject=input("text","Course / Subject");
+const add=node("button","Add Class","primary");add.type="submit";
+f.append(name,subject,add);
 f.onsubmit=e=>{
 e.preventDefault();
-data[type].push({name:name.value.trim(),url:url.value.trim()});
+data.classes.push({id:crypto.randomUUID(),name:name.value,subject:subject.value});
 save();show(current);
 };
 p.appendChild(f);
-renderLinks(p,data[type],type);
+data.classes.forEach(c=>line(p,c.name,c.subject,[
+btn("Remove",()=>removeItem("classes",c))
+]));
+const note=panel("Grades and Attendance");
+note.appendChild(node("p","Secure grading and attendance storage will be added after authentication and private database setup.","notice"));
 }
-function renderLinks(p,items,type){
-if(!items.length){
-p.appendChild(el("p","No resources added yet.","muted"));
-return;
-}
-items.forEach(item=>{
-const row=el("div",undefined,"item");
-const d=el("div",undefined,"details");
-const a=el("a",item.name);
-a.href=item.url;
-a.target="_blank";
-a.rel="noopener noreferrer";
-d.appendChild(a);
-row.append(d);
-if(type){
-row.appendChild(button("Remove",()=>{
-if(!confirm("Remove this resource?"))return;
-data[type]=data[type].filter(x=>x!==item);
+function students(){
+const p=panel("Student Directory — Demo");
+p.appendChild(node("p","For testing only. Do not enter real student personal information.","notice"));
+const f=node("form",undefined,"row");
+const name=input("text","Sample student name");
+const section=input("text","Class section");
+const add=node("button","Add Sample","primary");add.type="submit";
+f.append(name,section,add);
+f.onsubmit=e=>{
+e.preventDefault();
+data.students.push({name:name.value,section:section.value});
 save();show(current);
-}));
-}
-p.appendChild(row);
-});
-}
-function directory(){
-const p=panel("All Resource Links");
-p.appendChild(el("h3","Learning Guides"));
-renderLinks(p,data.guides);
-p.appendChild(el("h3","Forms & Rubrics"));
-renderLinks(p,data.forms);
+};
+p.appendChild(f);
+data.students.forEach(s=>line(p,s.name,s.section,[
+btn("Remove",()=>removeItem("students",s))
+]));
 }
 function tasks(){
-const p=panel("My Tasks");
-const f=el("form",undefined,"form");
-const name=el("input");
-name.placeholder="Task description";
-name.required=true;
-const date=el("input");
-date.type="date";
-const add=el("button","Add Task","primary");
-add.type="submit";
+const p=panel("To-Do List");
+const f=node("form",undefined,"row");
+const name=input("text","Task description");
+const date=input("date");
+const add=node("button","Add Task","primary");add.type="submit";
 f.append(name,date,add);
 f.onsubmit=e=>{
 e.preventDefault();
-data.tasks.push({
-name:name.value.trim(),
-date:date.value,
-done:false
-});
+data.tasks.push({name:name.value,date:date.value,done:false});
 save();show(current);
 };
 p.appendChild(f);
 data.tasks.forEach(t=>{
-const row=el("div",undefined,"item");
-const d=el("div",undefined,"details");
-const title=el("strong",t.name,t.done?"done":"");
-d.append(title,el("span",t.date||"No deadline"));
-const actions=el("div",undefined,"actions");
-actions.append(
-button(t.done?"Undo":"Complete",()=>{
-t.done=!t.done;save();show(current);
-}),
-button("Remove",()=>{
-data.tasks=data.tasks.filter(x=>x!==t);
-save();show(current);
-})
-);
-row.append(d,actions);
-p.appendChild(row);
+const r=line(p,t.name,t.date||"No deadline",[
+btn(t.done?"Undo":"Complete",()=>{t.done=!t.done;save();show(current)}),
+btn("Delete",()=>removeItem("tasks",t))
+]);
+if(t.done)r.querySelector("strong").className="done";
 });
 }
-function events(){
+function calendar(){
 const p=panel("Academic Calendar");
-const f=el("form",undefined,"form");
-const name=el("input");
-name.placeholder="Event title";
-name.required=true;
-const date=el("input");
-date.type="date";
+const controls=node("div",undefined,"row");
+const label=node("strong");
+function change(n){
+month+=n;
+if(month<0){month=11;year--}
+if(month>11){month=0;year++}
+show("Calendar");
+}
+controls.append(btn("◀",()=>change(-1)),label,btn("▶",()=>change(1)));
+label.textContent=new Date(year,month,1).toLocaleDateString("en-US",{month:"long",year:"numeric"});
+p.appendChild(controls);
+const grid=node("div",undefined,"calendar");
+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>grid.appendChild(node("strong",d)));
+const first=new Date(year,month,1).getDay();
+const days=new Date(year,month+1,0).getDate();
+for(let i=0;i<first;i++)grid.appendChild(node("div"));
+for(let d=1;d<=days;d++){
+const cell=node("div",undefined,"day");
+const date=year+"-"+String(month+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+if(date===new Date().toLocaleDateString("en-CA"))cell.classList.add("today");
+cell.appendChild(node("b",String(d)));
+data.events.filter(e=>e.date===date).forEach(e=>
+cell.appendChild(node("span",e.name,"event")));
+grid.appendChild(cell);
+}
+p.appendChild(grid);
+const f=node("form",undefined,"row");
+const name=input("text","Event title");
+const date=input("date");
 date.required=true;
-const add=el("button","Add Event","primary");
-add.type="submit";
+const add=node("button","Add Event","primary");add.type="submit";
 f.append(name,date,add);
 f.onsubmit=e=>{
 e.preventDefault();
-data.events.push({name:name.value.trim(),date:date.value});
+data.events.push({name:name.value,date:date.value});
 save();show(current);
 };
 p.appendChild(f);
-const sorted=[...data.events].sort((a,b)=>a.date.localeCompare(b.date));
-sorted.forEach(event=>{
-const row=el("div",undefined,"item");
-const d=el("div",undefined,"details");
-d.append(el("strong",event.name),el("span",event.date));
-row.append(d,button("Remove",()=>{
-data.events=data.events.filter(x=>x!==event);
-save();show(current);
-}));
-p.appendChild(row);
+data.events.slice().sort((a,b)=>a.date.localeCompare(b.date))
+.forEach(e=>line(p,e.name,e.date,[
+btn("Delete",()=>removeItem("events",e))
+]));
+}
+function directory(){
+const p=panel("File Directory");
+p.appendChild(node("p","Open Learning Guides or Forms & Rubrics to manage uploaded files.","muted"));
+for(const type of ["guides","forms"]){
+p.appendChild(node("h3",type==="guides"?"Learning Guides":"Forms & Rubrics"));
+data[type].forEach(item=>{
+line(p,item.name,item.category||"General",[
+btn("Open Section",()=>show(type==="guides"?"Learning Guides":"Forms & Rubrics"))
+]);
 });
 }
-function placeholder(name){
-const p=panel(name);
-p.appendChild(el("p",
-"This section is being prepared. Student records and grades will require secure private storage.",
-"muted"));
 }
 function settings(){
-const p=panel("Backup Your Workspace");
-p.appendChild(el("p",
-"Export your saved resource links, tasks, and calendar events as a JSON backup."));
-p.appendChild(button("Export Backup",()=>{
+const p=panel("Settings and Backup");
+p.appendChild(node("p","Export your tasks, links, calendar events, and class demo data as JSON."));
+p.appendChild(btn("Export JSON Backup",()=>{
 const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
-a.href=url;
-a.download="pe-faculty-hub-backup.json";
-a.click();
-URL.revokeObjectURL(url);
+a.href=url;a.download="pe-faculty-hub-backup.json";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),1000);
 },"primary"));
+p.appendChild(node("p","Uploaded file contents are stored separately in IndexedDB and are NOT included in the JSON backup.","notice"));
+const restore=input("file");
+restore.accept=".json";
+p.appendChild(node("h3","Restore JSON Backup"));
+p.appendChild(restore);
+p.appendChild(btn("Restore",async()=>{
+const file=restore.files[0];if(!file)return;
+try{
+const parsed=JSON.parse(await file.text());
+if(!parsed||typeof parsed!=="object"||
+!Array.isArray(parsed.guides)||!Array.isArray(parsed.tasks))
+throw Error("Invalid backup");
+if(!confirm("Replace current records with this backup?"))return;
+data={...defaults,...parsed};save();show("Dashboard");
+}catch(e){alert("Restore failed: "+e.message)}
+}));
 }
 show("Dashboard");
 </script>
